@@ -42,7 +42,7 @@ class App extends React.Component {
   render() {
      return (
     <div>
-      <li>{console.log(this.state.apiData.next.{results:})}</li>
+      <li>{console.log(this.state.apiData.next.{results: name})}</li>
      
       <Results 
       onInput={this.handlePokeInput}
