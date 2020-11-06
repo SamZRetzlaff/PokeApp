@@ -10,6 +10,7 @@ class App extends React.Component {
       apiData: [],
       pokemonData: [],
       pokeInput: '',
+      pokemonList: []
     }
   }
 
@@ -32,7 +33,13 @@ class App extends React.Component {
     this.setState({pokemonData: json})
   }
 
-  handleViewAll = () => {
+  async handleViewAll (event) {
+    event.preventDefault();
+    for(var i = 1; i< this.state.apiData.count; i++){
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
+      const json = await response.json()
+      this.setState({pokemonList: this.state.pokemonList.concat({pokemonList: json})})
+    }
     
   }
   
@@ -42,12 +49,13 @@ class App extends React.Component {
   render() {
      return (
     <div>
-      <li>{console.log(this.state.apiData.next.{results: name})}</li>
+      <h1>Poke App</h1>
+      <li>Test Bed: {console.log(this.state.apiData)}</li>
      
       <Results 
       onInput={this.handlePokeInput}
       onSubmit={this.handleSubmit.bind(this)}
-      onViewAll ={this.handleViewAll}
+      onViewAll ={this.handleViewAll.bind(this)}
       pokemonData ={this.state.pokemonData}/>
 
     </div>
