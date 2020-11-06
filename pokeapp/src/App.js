@@ -8,6 +8,7 @@ class App extends React.Component {
     super(props)
     this.state = {
       apiData: [],
+      pokemonData: [],
       pokeInput: '',
     }
   }
@@ -18,32 +19,40 @@ class App extends React.Component {
     const json = await response.json()
     this.setState({apiData: json})
   }
-    
+      
   handlePokeInput = (event) => {
     event.preventDefault()
     this.setState({pokeInput: event.target.value})
   }
 
-  // searchPoke = (event) => {
-  //   event.preventDefault();
-  //   this.setState({name: this.state.pokeInput})
-  // } onSearch={this.searchPoke}
+  async handleSubmit (event) {
+    event.preventDefault();
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${this.state.pokeInput}`)
+    const json = await response.json()
+    this.setState({pokemonData: json})
+  }
+
+  handleViewAll = () => {
+    
+  }
+  
 
 
 //RENDER
   render() {
      return (
     <div>
-      <h1>Poke App</h1>
-  
+      <li>{console.log(this.state.apiData.next.{results:})}</li>
+     
       <Results 
       onInput={this.handlePokeInput}
-      pokemonData={/*this.state.apiData*/this.componentDidMount}/>
+      onSubmit={this.handleSubmit.bind(this)}
+      onViewAll ={this.handleViewAll}
+      pokemonData ={this.state.pokemonData}/>
 
     </div>
   );
 }
-
-  }
+}
  
 export default App;
